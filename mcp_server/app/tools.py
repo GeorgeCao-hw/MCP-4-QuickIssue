@@ -55,12 +55,12 @@ def list_tools():
 
                         "author": {
                             "type": "string",
-                            "description": "Issue author / creator"
+                            "description": "Issue author / creator. Use this when user says 'X提交的/创建的'"
                         },
 
                         "assignee": {
                             "type": "string",
-                            "description": "User assigned to the issue"
+                            "description": "User assigned to the issue. Use this when user says '分配给X的 '"
                         },
 
                         "branch": {
@@ -111,14 +111,34 @@ def list_tools():
 
                         "page_size": {
                             "type": "integer",
-                            "description": (
-                                "Number of issues per page (max 100)"
-                            ),
+                            "description": ("Number of issues per page (max 100)"),
                             "default": 10
+                        },
+
+                        "limit": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 50,
+                            "default": 10,
+                            "description": "Maximum number of issues to return. If user asks for N results, you MUST set limit=N."
+                        },
+
+                        "sort_by": {
+                            "type": "string",
+                            "enum": ["created_at", "updated_at"],
+                            "default": "updated_at",
+                            "description": "Sort field. 'latest' usually means updated_at unless user specifies created time."
+                        },
+                        "order": {
+                            "type": "string",
+                            "enum": ["asc", "desc"],
+                            "default": "desc"
                         }
-                    },
+
+                    }
+
+                },
                     "required": []
-                }
             }
         ]
     }
